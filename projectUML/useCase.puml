@@ -1,0 +1,44 @@
+@startuml
+'left to right direction
+actor Admin
+usecase "walk-in guest service" as walkIn
+usecase "Add guest information"
+usecase "Save guest information"
+usecase "Assign bow and arrows" as bowNArrow
+usecase "Assign lane" as walkInLane
+usecase "Check in"
+usecase "Check out"
+usecase "Calculate playtime"
+usecase "Calculate money"
+usecase "Return bow and arrows"
+usecase "Unassigned lane"
+
+usecase "Club member management"
+
+
+usecase "Storage management"
+usecase "Bow and arrows management"
+usecase "Beverage management"
+
+Admin -- "Club member management"
+
+Admin -- "Storage management"
+ "Storage management" .. "Bow and arrows management" : <<extend>>
+ "Storage management" .. "Beverage management" : <<extend>>
+"Bow and arrows management" --- bowNArrow
+"Bow and arrows management" --- "Return bow and arrows"
+
+Admin -- walkIn
+walkIn -- "Check in"
+"Check in" .. bowNArrow : <<include>>
+"Check in" .. walkInLane : <<include>>
+"Check in" .. "Add guest information" : <<include>>
+"Add guest information" .. "Save guest information" : <<extend>>
+walkIn -- "Check out"
+"Check out" . "Calculate money" : <<include>>
+"Check out" .. "Calculate playtime" : <<include>>
+"Check out" .. "Return bow and arrows" : <<include>>
+"Check out" .. "Unassigned lane" : <<include>>
+
+
+@enduml
