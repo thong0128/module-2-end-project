@@ -6,16 +6,16 @@ public abstract class Bow {
     private Color color;
     private int poundage;
 
-    public Bow() {
+    Bow() {
     }
 
-    public Bow(Color color, int poundage) {
+    Bow(Color color, int poundage) {
         this.id = ++INDEX;
         this.color = color;
         this.poundage = poundage;
     }
 
-    public Bow(int poundage) {
+    Bow(int poundage) {
         this.poundage = poundage;
     }
 

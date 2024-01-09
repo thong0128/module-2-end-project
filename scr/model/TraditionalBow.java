@@ -3,14 +3,14 @@ package model;
 public class TraditionalBow extends Bow{
     private final int price = 150000;
 
-    public TraditionalBow() {
+    TraditionalBow() {
     }
 
-    public TraditionalBow(Color color, int poundage) {
+    TraditionalBow(Color color, int poundage) {
         super(color, poundage);
     }
 
-    public TraditionalBow(int poundage) {
+    TraditionalBow(int poundage) {
         super(poundage);
         setColor(Color.DEFAULT);
     }

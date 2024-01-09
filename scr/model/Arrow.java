@@ -4,10 +4,10 @@ public class Arrow {
     private int spine;
     private Color color;
 
-    public Arrow() {
+    Arrow() {
     }
 
-    public Arrow(int spine, Color color) {
+    Arrow(int spine, Color color) {
         this.spine = spine;
         this.color = color;
     }

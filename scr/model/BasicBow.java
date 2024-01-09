@@ -9,7 +9,7 @@ public class BasicBow extends Bow{
         super(color, poundage);
     }
 
-    public BasicBow(int poundage) {
+    BasicBow(int poundage) {
         super(poundage);
         setColor(Color.BLACK);
     }
