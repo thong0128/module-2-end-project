@@ -15,7 +15,6 @@ usecase "Unassigned lane"
 
 usecase "Club member management"
 
-
 usecase "Storage management"
 usecase "Bow and arrows management"
 usecase "Beverage management"
