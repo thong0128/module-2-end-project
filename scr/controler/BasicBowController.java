@@ -7,6 +7,22 @@ import java.util.List;
 
 public class BasicBowController {
     public static List<BasicBow> basicBowList = new ArrayList<>();
+
+    public BasicBowController() {
+    }
+
+    public List<BasicBow> getBasicBowList() {
+        return basicBowList;
+    }
+
+    public void setBasicBowList(List<BasicBow> basicBowList) {
+        BasicBowController.basicBowList = basicBowList;
+    }
+
+    public BasicBowController(List<BasicBow> basicBowList) {
+        BasicBowController.basicBowList = basicBowList;
+    }
+
     public static void addNewBasicBow(BasicBow basicBow) {
         basicBowList.add(basicBow);
     }
@@ -19,5 +35,4 @@ public class BasicBowController {
         }
         System.out.println("No bow with id: " + id);
     }
-
 }
