@@ -1,6 +1,8 @@
 package model;
 
-public abstract class Bow {
+import java.io.Serializable;
+
+public abstract class Bow implements Serializable {
     private static int INDEX;
     private int id;
     private Color color;

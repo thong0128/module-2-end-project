@@ -8,8 +8,8 @@ import java.util.List;
 
 public class ShootingLaneControllerSingleton implements Alertable {
     private static final int NUMBER_OF_LANE = 20;
-    public static List<ShootingLane> laneList = new ArrayList<>();
-    public static List<ShootingLane> inUse = new ArrayList<>();
+    public  List<ShootingLane> laneList = new ArrayList<>();
+    public  List<ShootingLane> inUse = new ArrayList<>();
     public static ShootingLaneControllerSingleton instance;
 
     private ShootingLaneControllerSingleton() {

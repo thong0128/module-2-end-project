@@ -1,34 +1,90 @@
 package view;
 
+import controler.BasicBowController;
 import controler.BasicBowPoolSingleton;
 import controler.ShootingLaneControllerSingleton;
-import model.Bow;
-import model.Customer;
-import model.PlaySession;
-import model.ShootingLane;
+import model.*;
 
 import static view.Input.*;
 
 public class Main {
-    ShootingLaneControllerSingleton myLanes = ShootingLaneControllerSingleton.getInstance();
-    BasicBowPoolSingleton myBows = BasicBowPoolSingleton.getInstance();
-    public void mainMenu() {
-        System.out.println("-----------------------");
-        System.out.println("Archery shooting range manager");
-        System.out.println("1.Guest management");
-        System.out.println("2.Lane management");
-        System.out.print("Enter choice: ");
-        int choice = intInput();
-        switch (choice) {
-            case 1:
-                guestMenu();
-                break;
-            case 2:
-                laneManagementMenu();
-                break;
+    public static void main(String[] args) {
+        mainMenu();
+    }
+    static ShootingLaneControllerSingleton myLanes = ShootingLaneControllerSingleton.getInstance();
+    static BasicBowPoolSingleton myBows = BasicBowPoolSingleton.getInstance();
+    static BasicBowController myBowList = BasicBowController.getInstance();
+    public static void mainMenu() {
+        while (true) {
+            System.out.println("-----------------------");
+            System.out.println("Archery shooting range manager");
+            System.out.println("1.Guest management");
+            System.out.println("2.Lane management");
+            System.out.println("3.Bow management");
+            System.out.println("0.Exit");
+            System.out.print("Enter choice: ");
+            int choice = intInput();
+            switch (choice) {
+                case 0:
+                    System.exit(0);
+                case 1:
+                    guestMenu();
+                    break;
+                case 2:
+                    laneManagementMenu();
+                    break;
+                case 3:
+                    bowManagementMenu();
+                    break;
+                default:
+                    System.out.println("invalid input");
+            }
         }
     }
-    public void guestMenu() {
+
+    private static void bowManagementMenu() {
+        int choice = -1;
+        while (choice != 0) {
+            System.out.println("**********");
+            System.out.println("Bow management menu");
+            System.out.println("1.New Bow");
+            System.out.println("2.Remove Bow");
+            System.out.println("3.Show list");
+            System.out.println("0.Main Menu");
+            System.out.print("Enter choice: ");
+            choice = intInput();
+            switch (choice) {
+                case 1:
+                    System.out.println("Enter poundage: ");
+                    int poundage = intInput();
+                    myBowList.addNewBasicBow(new BasicBow(poundage));
+                    break;
+                case 2:
+                    System.out.println("Enter id: ");
+                    int id = intInput();
+                    for (Bow bow: myBowList.getBasicBowList()){
+                        if (bow.getId() == id) {
+                            myBowList.deleteByID(id);
+                            break;
+                        }
+                    }
+                    System.out.println("There is no bow id: " + id);
+                    break;
+                case 3:
+                    for (Bow bow: myBowList.getBasicBowList()){
+                        System.out.println(bow);
+                    }
+                    break;
+                case 0:
+                    mainMenu();
+                    break;
+                default:
+                    System.out.println("Please input again");
+            }
+        }
+    }
+
+    public static void guestMenu() {
         int choice = -1;
         while (choice != 0) {
             System.out.println("**********");
@@ -49,7 +105,7 @@ public class Main {
             }
         }
     }
-    public void laneManagementMenu() {
+    public static void laneManagementMenu() {
         int choice = -1;
         while (choice != 0) {
             System.out.println("**********");
@@ -60,12 +116,12 @@ public class Main {
             choice = intInput();
             switch (choice) {
                 case 1:
-                    for (ShootingLane lane : ShootingLaneControllerSingleton.laneList) {
+                    for (ShootingLane lane : myLanes.laneList) {
                         System.out.println(lane);
-                        break;
                     }
+                    break;
                 case 2:
-                    for (ShootingLane lane : ShootingLaneControllerSingleton.inUse) {
+                    for (ShootingLane lane : myLanes.inUse) {
                         System.out.println(lane);
                     }
                     activeLaneMenu();
@@ -78,7 +134,7 @@ public class Main {
             }
         }
     }
-    public void guestInput() {
+    public static void guestInput() {
         System.out.println("~~~~~~~~~~");
         System.out.println("Enter guest's name: ");
         String name = stringInput();
@@ -90,7 +146,7 @@ public class Main {
         autoLaneMenu(playSession);
     }
 
-    private void autoLaneMenu(PlaySession playSession) {
+    private static void autoLaneMenu(PlaySession playSession) {
         System.out.println("Auto Lane assign? y/n");
         while (true) {
             String ans = stringInput();
@@ -107,7 +163,7 @@ public class Main {
         }
     }
 
-    public void manualLaneAssign(PlaySession playSession) {
+    public static void manualLaneAssign(PlaySession playSession) {
         System.out.println("~~~~~~~~~~");
         System.out.println("Enter lane id: ");
         int id = intInput();
@@ -115,7 +171,7 @@ public class Main {
         autoStartMenu(playSession);
     }
 
-    public void autoStartMenu(PlaySession playSession) {
+    public static void autoStartMenu(PlaySession playSession) {
         System.out.println("Do you want to start now? y/n");
         while (true) {
             String ans = stringInput();
@@ -129,7 +185,7 @@ public class Main {
             }
         }
     }
-    public void activeLaneMenu() {
+    public static void activeLaneMenu() {
         System.out.println("Enter lane id: ");
         int id = intInput();
         ShootingLane shootingLane = myLanes.getActiveLaneById(id);
@@ -152,6 +208,7 @@ public class Main {
                     break;
                 case 2:
                     playSession.endSesstion();
+                    System.out.println(playSession.getPrice());
                     myLanes.releaseLane(id);
                     break;
                 case 0:
