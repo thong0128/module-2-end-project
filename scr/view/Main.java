@@ -208,7 +208,7 @@ public class Main {
                     break;
                 case 2:
                     playSession.endSesstion();
-                    System.out.println(playSession.getPrice());
+                    System.out.println("Price: " + playSession.getPrice());
                     myLanes.releaseLane(id);
                     break;
                 case 0:
