@@ -1,13 +1,19 @@
 package model;
 
 public class Arrow {
+    private static final int PRICE = 100000;
     private int spine;
     private Color color;
 
-    Arrow() {
+    public Arrow() {
     }
 
-    Arrow(int spine, Color color) {
+    public Arrow(int spine) {
+        this.spine = spine;
+        this.color = Color.BLUE;
+    }
+
+    public Arrow(int spine, Color color) {
         this.spine = spine;
         this.color = color;
     }

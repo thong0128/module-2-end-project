@@ -1,7 +1,7 @@
 package model;
 
-public class BasicBow extends Bow{
-    private final int price = 100000;
+public class BasicBow extends Bow {
+    private static final int PRICE = 100000;
     public BasicBow() {
     }
 
@@ -16,13 +16,13 @@ public class BasicBow extends Bow{
 
     @Override
     public int getPrice() {
-        return price;
+        return PRICE;
     }
 
     @Override
     public String toString() {
         return "BasicBow{" +
-                "price=" + price +
+                "price=" + PRICE +
                 "} " + super.toString();
     }
 

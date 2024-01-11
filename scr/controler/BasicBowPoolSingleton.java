@@ -13,18 +13,14 @@ public class BasicBowPoolSingleton implements Alertable{
     private static final int NUMBER_OF_BASIC_BOW = BasicBowController.basicBowList.size();
     private final List<BasicBow> available = BasicBowController.basicBowList;
     private final List<BasicBow> inUse = new ArrayList<>();
-    public BasicBowPoolSingleton instance;
+    public static BasicBowPoolSingleton instance;
 
     private BasicBowPoolSingleton() {
     }
 
-    private BasicBowPoolSingleton(BasicBowPoolSingleton instance) {
-        this.instance = instance;
-    }
-
-    public BasicBowPoolSingleton getInstance() {
+    public static BasicBowPoolSingleton getInstance() {
         if (instance == null) {
-            return new BasicBowPoolSingleton();
+            instance = new BasicBowPoolSingleton();
         }
         return instance;
     }
@@ -48,6 +44,16 @@ public class BasicBowPoolSingleton implements Alertable{
         alert("No bow available");
         return null;
     }
+    public BasicBow getBasicBow() {
+        if (!available.isEmpty()) {
+            BasicBow bow = available.remove(0);
+            inUse.add(bow);
+            alert("Rent out " + bow);
+            return bow;
+        }
+        alert("No bow available");
+        return null;
+    }
 
     public List<BasicBow> getAvailable() {
         return available;
@@ -59,6 +65,6 @@ public class BasicBowPoolSingleton implements Alertable{
 
     @Override
     public void alert(String mess) {
-        System.out.println("mess");
+        System.out.println(mess);
     }
 }

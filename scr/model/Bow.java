@@ -43,7 +43,6 @@ public abstract class Bow {
         this.poundage = poundage;
     }
     public abstract int getPrice();
-
     @Override
     public String toString() {
         return "Bow{" +
